@@ -1,0 +1,21 @@
+{% extends "base/main.html" %}
+{% load i18n %}
+
+{% block content %}
+<div class="container">
+  <div class="jumbotron text-center">
+    <h1>{% trans "Find out more" %}</h1>
+    <h2>
+      {% blocktrans %}
+      We've received your request and will be in touch shortly
+      {% endblocktrans %}
+    </h2>
+
+    <p>
+      <a class="btn btn-success btn-large" href="{% url "grant-search" %}">
+        {% trans "Back to Grants" %}
+      </a>
+    </p>
+  </div>
+</div>
+{% endblock content %}

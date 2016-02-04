@@ -9,3 +9,5 @@ MIDDLEWARE_CLASSES = [
 INSTALLED_APPS += [
     'debug_toolbar',
 ]
+
+OPENID_URL = 'localhost:8000/openid/xrds'
