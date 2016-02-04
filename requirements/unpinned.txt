@@ -1,6 +1,0 @@
-Django
-django-stronghold
-psycopg2
-python-openid
-PyYAML
-raven
