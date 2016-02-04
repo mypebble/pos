@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/1.9/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.9/ref/settings/
 """
+from datetime import timedelta
 
 import os
 
@@ -32,6 +33,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'stronghold',
+    'social.apps.django_app.default',
+    'widget_tweaks',
+
+    'pos.core',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -43,6 +50,9 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'social.apps.django_app.middleware.SocialAuthExceptionMiddleware',
+    'stronghold.middleware.LoginRequiredMiddleware',
 ]
 
 ROOT_URLCONF = 'pos.urls'
@@ -50,7 +60,7 @@ ROOT_URLCONF = 'pos.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates'), ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -106,6 +116,84 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'collected-static')
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+
+
+AUTHENTICATION_BACKENDS = (
+    'pos.core.backends.PebbleBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+SOCIAL_AUTH_ADMIN_USER_SEARCH_FIELDS = (
+    'email',
+)
+
+SOCIAL_AUTH_PIPELINE = (
+    'social.pipeline.social_auth.social_details',
+    'social.pipeline.social_auth.social_uid',
+    'social.pipeline.social_auth.auth_allowed',
+    'social.pipeline.social_auth.social_user',
+    'social.pipeline.user.get_username',
+    'social.pipeline.social_auth.associate_by_email',
+    'social.pipeline.user.create_user',
+    'social.pipeline.social_auth.associate_user',
+    'social.pipeline.social_auth.load_extra_data',
+    'social.pipeline.user.user_details',
+)
+
+OPENID_URL = 'example.com'
+
+# If this was the last link on the chain, then we go back to the master
+# This is just a redirect, so you can pass in a server-local destination
+MASTER_SERVER = 'http://example.com/'
+MASTER_SERVER_LOGOUT = 'http://example.com/logout/'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+SUPPORT_EMAIL = 'support@mypebble.co.uk'
+MARKETING_EMAIL = 'info@mypebble.co.uk'
+PEBBLE_PHONE = '0845 310 1788'
+
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+SESSION_COOKIE_AGE = timedelta(days=1).total_seconds()
+
+SITE_ID = 1
+
+LOGIN_URL = '/social/login/pebble/'
+LOGIN_REDIRECT_URL = '/'
+
+REST_FRAMEWORK = {
+    'DEFAULT_PARSER_CLASSES': (
+        'rest_framework.parsers.FormParser',
+        'rest_framework.parsers.JSONParser',
+    ),
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.TemplateHTMLRenderer',
+        'rest_framework.renderers.JSONRenderer',
+    ),
+    'MAX_PAGINATE_BY': 1000,
+    'PAGINATE_BY': 20,
+    'PAGINATE_BY_PARAM': 'per_page',
+}
+
+# Let admin handle all this
+STRONGHOLD_PUBLIC_URLS = (
+    r'^/admin/',
+    r'^/reset/',
+    r'^/social/',
+)
+
+STRONGHOLD_PUBLIC_NAMED_URLS = (
+    'login',
+    'password-reset',
+    'set-password',
+    'password_reset-confirm',
+    'password-reset-confirm',
+    'password_reset_complete',
+    'password_reset_done',
+)
+
 
 try:
     from .local_settings import *

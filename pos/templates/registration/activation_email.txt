@@ -1,0 +1,11 @@
+{% load i18n %}{% trans "Greetings" %} {{ user.first_name }},
+
+{% blocktrans %}Your Arro account has been created.
+
+All we need you to do now is create your password at:
+
+(link)
+
+Best regards,
+
+The Pebble Team{% endblocktrans %}

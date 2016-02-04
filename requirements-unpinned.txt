@@ -1,0 +1,8 @@
+Django
+django-stronghold
+psycopg2
+python-social-auth
+PyYAML
+raven
+django-debug-toolbar
+django-widget-tweaks

@@ -1,0 +1,12 @@
+{% load i18n %}{% trans "Welcome" %} {{ user.first_name }},
+{% blocktrans %}
+Thank you for signing up for Arro.
+
+We just need you to click the link below and set your password to sign into
+Arro:
+{% endblocktrans %}
+{{ protocol }}://{{ domain }}{% url 'set-password' uidb64=uid token=token %}
+{% blocktrans %}
+Best Regards,
+
+The Pebble Fundraising Team{% endblocktrans %}

@@ -1,0 +1,8 @@
+{% load i18n %}
+{% load core_tags %}
+<li class="{% active_navigation "search" %}">
+    <a href="{% url "grant-search" %}">{% trans "Grant Search" %}</a>
+</li>
+<li class="{% active_navigation "grants" %}">
+    <a href="{% url "project-list" %}">{% trans "My Grants" %}</a>
+</li>

@@ -1,0 +1,27 @@
+{% block subject %}Arro - Expiring Grants{% endblock %}
+
+{% block plain %}
+    Hi {{ username }},
+
+    The following grants are about to expire and may need to be renewed:
+    {% for g in grants %}
+        {{ g.title }}
+        {{ g.summary }}
+    {% endfor %}
+
+{% endblock %}
+
+{% block html %}
+    <p>Hi {{ username }}, <br/><br/>
+        The following grants are about to expire and may need to be renewed:
+    </p>
+    <ul>
+        {% for g in grants %}
+            <li>
+                <h3>{{ g.title }}</h3>
+                <p>{{ g.summary }}</p>
+            </li>
+        {% endfor %}
+
+    </ul>
+{% endblock %}

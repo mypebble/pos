@@ -65,3 +65,4 @@ target/
 .project
 
 pos/jsapp/node_modules/
+pos/collected-static/
