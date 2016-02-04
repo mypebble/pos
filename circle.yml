@@ -1,0 +1,7 @@
+dependencies:
+    post:
+        - cd pos/jsapp && npm install && npm run-script compile
+        - cd pos && python ../manage.py collectstatic --noinput
+machine:
+  environment:
+    DJANGO_SETTINGS_MODULE: pos.settings
