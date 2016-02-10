@@ -1,0 +1,33 @@
+{% extends "base/main.html" %}
+{% load i18n %}
+
+{% block content %}
+<div class="container">
+  <div class="jumbotron text-center">
+    <h1>{% trans "Find out more" %}</h1>
+    <h2>
+      <strong>{{ package|capfirst }}</strong>
+      {% blocktrans %}
+      is not currently part of your subscription plan
+      {% endblocktrans %}
+    </h2>
+    <p class="lead">
+      {% blocktrans %}
+      Grant Search is one element of Income Generation. If you are interested
+      in learning more about our full Income Generation Package please call us on
+      {% endblocktrans %}
+      {{ phone_number }} {% trans "or email" %}
+      <a href="mailto:{{ email_address }}">{{ email_address }}</a>
+    </p>
+    <p>
+      <form method="post">
+        {% csrf_token %}
+        <input type="hidden" name="package" value="{{ package }}" />
+        <button class="btn btn-success btn-lg">
+          {% trans "Get Started Now" %}
+        </button>
+      </form>
+    </p>
+  </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,240 @@
+{% load i18n %}
+{% load cache %}
+{% load static %}
+
+{% load core_tags %}
+
+
+{% cache 300 nav request.user.email %}
+<nav id="mainnav-container">
+  <div id="mainnav">
+    <div id="mainnav-menu-wrap">
+      <div class="nano">
+        <div class="nano-content">
+          <ul id="mainnav-menu" class="list-group">
+            <li>
+              <a href="{% menu_item "report" %}">
+                <i class="glyphicon glyphicon-dashboard"></i>
+                <span class="menu-title">
+                  <strong>{% trans "Dashboard" %}</strong>
+                </span>
+              </a>
+            </li>
+            <li class="list-divider"></li>
+            <li class="list-header">{% trans "Activities" %}</li>
+
+            {% block club %}
+            <li class="nav-clubs">
+              <a href="{% menu_item "clubs" %}">
+                <i class="glyphicon glyphicon-flag"></i>
+                <span class="menu-title">
+                  {% trans "Clubs" %}
+                </span>
+                <i class="arrow"></i>
+              </a>
+              <ul class="collapse">
+                <li>
+                  <a href="{% menu_item "clubs" %}new/">
+                    <i class="glyphicon glyphicon-plus"></i>
+                    {% trans "Create Club" %}
+                  </a>
+                </li>
+                <li class="list-divider"></li>
+                <li>
+                  <a href="{% menu_item "clubs" %}">
+                    <i class="glyphicon glyphicon-th"></i>
+                    {% trans "Manage Clubs" %}
+                  </a>
+                </li>
+              </ul>
+            </li>
+            {% endblock club %}
+
+            {% block donations %}
+            <li class="nav-donations">
+              <a href="{% menu_item "donations" %}">
+                <i class="fa fa-gift"></i>
+                <span class="menu-title">
+                  {% trans "Donations" %}
+                </span>
+                <i class="arrow"></i>
+              </a>
+              <ul class="collapse">
+                <li class="">
+                  <a href="{% menu_item "donations" %}">
+                    <i class="glyphicon glyphicon-plus"></i>
+                    {% trans "Record Donation" %}
+                  </a>
+                </li>
+                <li class="list-divider"></li>
+                <li>
+                  <a href="{% menu_item "report" %}income/giftaid/">
+                    {% trans "Claim Gift Aid" %}
+                  </a>
+                </li>
+                <li>
+                  <a href="{% menu_item "report" %}giftaid/">
+                    {% trans "View Archived Claims" %}
+                  </a>
+                </li>
+              </ul>
+            </li>
+            {% endblock donations %}
+
+            {% block event %}
+            <li class="nav-events">
+              <a href="{% menu_item "events" %}">
+                <i class="glyphicon glyphicon-calendar"></i>
+                <span class="menu-title">
+                  {% trans "Events" %}
+                </span>
+                <i class="arrow"></i>
+              </a>
+              <ul class="collapse">
+                <li>
+                  <a href="{% menu_item "events" %}new/">
+                    <i class="glyphicon glyphicon-plus"></i>
+                    {% trans "Create Event" %}
+                  </a>
+                </li>
+                <li class="list-divider"></li>
+                <li>
+                  <a href="{% menu_item "events" %}">
+                    <i class="glyphicon glyphicon-th"></i>
+                    {% trans "Manage Events" %}
+                  </a>
+                </li>
+              </ul>
+            </li>
+            {% endblock event %}
+
+            {% block grant %}
+            <li class="nav-grants active">
+              <a href="{% url "grant-search" %}">
+                <i class="glyphicon glyphicon-briefcase"></i>
+                <span class="menu-title">
+                  {% trans "Grants" %}
+                </span>
+                <i class="arrow"></i>
+              </a>
+            </li>
+            {% endblock grant %}
+
+            <li class="list-divider"></li>
+
+            <li class="list-header">{% trans "System" %}</li>
+
+            {% block project %}
+            <li class="nav-projects">
+              <a href="{% menu_item "projects" %}">
+                <i class="glyphicon glyphicon-th"></i>
+                <span class="menu-title">
+                  {% trans "Projects" %}
+                </span>
+                <i class="arrow"></i>
+              </a>
+              <ul class="collapse">
+                <li>
+                  <a href="{% menu_item "projects" %}new/">
+                    <i class="glyphicon glyphicon-plus"></i>
+                    {% trans "Create Project" %}
+                  </a>
+                </li>
+                <li class="list-divider"></li>
+                <li>
+                  <a href="{% menu_item "projects" %}">
+                    <i class="glyphicon glyphicon-th"></i>
+                    {% trans "Manage Projects" %}
+                  </a>
+                </li>
+              </ul>
+            </li>
+            {% endblock project %}
+
+            {% block report %}
+            <li class="nav-reports">
+              <a href="{% menu_item "report" %}">
+                <i class="glyphicon glyphicon-tasks"></i>
+                <span class="menu-title">
+                  {% trans "Reports" %}
+                </span>
+                <i class="arrow"></i>
+              </a>
+            </li>
+            {% endblock report %}
+
+            {% block finance %}
+            <li class="nav-finance">
+              <a href="{% menu_item "finance" %}new/">
+                <i class="glyphicon glyphicon-sort"></i>
+                <span class="menu-title">
+                  {% trans "Transactions" %}
+                </span>
+                <i class="arrow"></i>
+              </a>
+              <ul class="collapse">
+                <li>
+                  <a href="{% menu_item "finance" %}new/">
+                    <i class="glyphicon glyphicon-plus"></i>
+                    {% trans "Record Transaction" %}
+                  </a>
+                </li>
+                <li class="list-divider"></li>
+                <li>
+                  <a href="{% menu_item "report" %}transaction/">
+                    {% trans "View Transactions" %}
+                  </a>
+                </li>
+                <li>
+                  <a href="{% menu_item "finance" %}amend/">
+                    {% trans "Amend Transaction" %}
+                  </a>
+                </li>
+              </ul>
+            </li>
+            {% endblock finance %}
+
+            {% block admin %}
+            <li class="nav-admin">
+              <a href="#">
+                <i class="glyphicon glyphicon-wrench"></i>
+                <span class="menu-title">
+                  {% trans "Admin" %}
+                </span>
+                <i class="arrow"></i>
+              </a>
+              <ul class="collapse">
+                <li>
+                  <a href="{% menu_item "name" %}">Names</a>
+                </li>
+                <li>
+                  <a href="{% menu_item "account" %}">Accounts</a>
+                </li>
+                <li>
+                  <a href="{% menu_item "bank_account" %}">Bank Accounts</a>
+                </li>
+                <li>
+                  <a href="{% menu_item "group" %}">Groups</a>
+                </li>
+              </ul>
+            </li>
+            {% endblock admin %}
+            <li class="list-divider"></li>
+            <li class="">
+              <a href="{{ MASTER_SERVER_LOGOUT }}">
+                <i class="glyphicon glyphicon-off"></i>
+                <span class="menu-title">
+                  {% trans "Logout" %}
+                </span>
+              </a>
+            </li>
+          </ul>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</nav>
+{% endcache %}

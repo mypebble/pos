@@ -60,3 +60,9 @@ target/
 
 #Ipython Notebook
 .ipynb_checkpoints
+
+.idea/
+.project
+
+pos/jsapp/node_modules/
+pos/collected-static/

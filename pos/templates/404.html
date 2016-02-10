@@ -1,0 +1,56 @@
+{% extends "base/base.html" %}
+{% load i18n %}
+
+
+{% block body %}
+<div id="container" class="effect mainnav-lg">
+  <header id="navbar">
+    <div id="navbar-container">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="{{ MASTER_SERVER }}"></a>
+      </div>
+      <div class="navbar-content clearfix">
+        <div class="col-lg-12">
+          <div class="navbar-left menu-button">
+            <a href="" class="mainnav-toggle">
+              <i class="fa fa-navicon fa-lg"></i>
+            </a>
+          </div>
+          <span class="user_name pull-right">
+            {{ current_organisation.name }}
+          </span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  {% block nav %}{% include "base/nav.frag.html" %}{% endblock nav %}
+
+  <div class="flex-center">
+    <div class="col-lg-4 col-md-6">
+      <div class="panel">
+        <div class="panel-body">
+          <div class="body-title">
+            <i class="fa fa-frown-o fa-xl text-warning"></i>
+            <div class="title">{% trans "Grant Could not be Found" %}</div>
+            <span>{% trans "We Couldn't find any Active Grants for this Link" %}</span>
+          </div>
+          <p>
+            {% blocktrans %}
+            If you followed this link from an email, perhaps the grant has
+            expired.
+            {% endblocktrans %}
+          </p>
+        </div>
+        <div class="panel-footer panel-footer-b">
+          <a href="{% url "grant-search" %}" class="btn btn-clear btn-block">
+            {% trans "Search For Grants" %}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+{% endblock body %}

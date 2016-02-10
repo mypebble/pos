@@ -1,0 +1,49 @@
+{% extends "base/base.html" %}
+{% load i18n %}
+{% load static %}
+
+
+{% block body %}
+<!-- Navigation -->
+<div id="container" class="effect mainnav-lg">
+  <header id="navbar">
+    <div id="navbar-container">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="{{ MASTER_SERVER }}"></a>
+      </div>
+      <div class="navbar-content clearfix">
+        <div class="col-lg-12">
+          <div class="navbar-left menu-button">
+            <a href="" class="mainnav-toggle">
+              <i class="fa fa-navicon fa-lg"></i>
+            </a>
+          </div>
+          <span class="user_name pull-right">
+            {{ current_organisation.name }}
+          </span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  {% block nav %}{% include "base/nav.frag.html" %}{% endblock nav %}
+
+  <div id="content-container">
+    <div class="alert-row">
+    {% block alert %}{% endblock alert %}
+    </div>
+
+    <div id="page-content">
+      {% block content %}{% endblock content %}
+    </div>
+  </div>
+</div>
+
+{% endblock body %}
+
+{% block base_scripts %}
+
+{% block scripts %}
+{% endblock scripts %}
+
+{% endblock base_scripts %}
