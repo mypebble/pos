@@ -194,6 +194,11 @@ STRONGHOLD_PUBLIC_NAMED_URLS = (
     'password_reset_done',
 )
 
+DEBUG = False
+
+# use persistent db connection
+# https://docs.djangoproject.com/en/1.9/ref/databases/#persistent-connections
+CONN_MAX_AGE = 60
 
 try:
     from .local_settings import *
