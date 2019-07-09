@@ -1,0 +1,17 @@
+version: 2
+
+jobs:
+  build:
+    docker:
+      - image: circleci/python:3.6.1
+    steps:
+      - checkout
+
+      - run: mkdir -p /tmp/test_results/
+
+      - run:
+          name: Install dependencies in venv
+          command: |
+            pyvenv venv
+            . venv/bin/activate
+            bash -c "pip install -r requirements.txt" | tee
